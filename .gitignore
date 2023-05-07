@@ -1,0 +1,19 @@
+# ignore db
+*.db
+
+# ignore IDE-specific files
+.vscode/
+.idea/
+
+# ignore environment files
+env/
+.env
+
+# ignore logs
+*.log
+
+# ignore dependencies installed with pip
+/requirements.txt
+/libraries/
+
+/__pycahe__

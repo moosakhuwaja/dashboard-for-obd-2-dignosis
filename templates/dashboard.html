@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='../static/css/main.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="page-header" , class="center">
+            Dashboard
+        </h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        {% if not current_user.is_authenticated %}
+        <p>login to view functions</p>
+
+        {% elif df == "None" %}
+        <p> Welsome {{name}}</p>
+
+        <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <div class="form-group">
+                <label for="file">Upload CSV File:</label>
+                <input type="file" name="file" id="file" accept=".csv">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+        {% else %}
+        <div>
+            <button onclick="window.location.href='/coolantTemp'">change of coolant temp</button>
+            <button onclick="window.location.href='/trip_details'">Number of Trips</button>
+            <button onclick="window.location.href='/acc_detect'">Detected any Accidents?</button>
+            <button onclick="window.location.href='/fuel_consumption_per_trip'">fuel constption per trip</button>
+            <button style="background-color:red; border: none;" onclick="window.location.href='/delete_csv'">Delete
+                file</button>
+        </div>
+        {% if plot %}
+        {{ plot|safe }}
+
+        {% endif %}
+
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

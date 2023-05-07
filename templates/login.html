@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='../static/css/main.css') }}">
+{% endblock %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Login</h1>
+    <form action="{{ url_for('login') }}" method="POST">
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <button type="submit">login</button>
+        </div>
+    </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes style="background: #ff3333; border-radius: 20rem;
+    padding: 20px;">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+</div>
+
+{% endblock %}

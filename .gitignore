@@ -8,6 +8,7 @@
 # ignore environment files
 env/
 .env
+.pyc
 
 # ignore logs
 *.log
@@ -16,4 +17,4 @@ env/
 /requirements.txt
 /libraries/
 
-/__pycahe__
+/__pycahe__/

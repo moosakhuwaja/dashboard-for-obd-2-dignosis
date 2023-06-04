@@ -6,47 +6,84 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-12">
-        <h1 class="page-header" , class="center">
-            Dashboard
-        </h1>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-
-        {% if not current_user.is_authenticated %}
-        <p>login to view functions</p>
-
-        {% elif df == "None" %}
-        <p> Welsome {{name}}</p>
-
-        <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
-            {{ form.csrf_token }}
-            <div class="form-group">
-                <label for="file">Upload CSV File:</label>
-                <input type="file" name="file" id="file" accept=".csv">
-            </div>
-            <button type="submit" class="btn btn-primary">Upload</button>
-        </form>
-        {% else %}
-        <div>
-            <button onclick="window.location.href='/coolantTemp'">change of coolant temp</button>
-            <button onclick="window.location.href='/trip_details'">Number of Trips</button>
-            <button onclick="window.location.href='/acc_detect'">Detected any Accidents?</button>
-            <button onclick="window.location.href='/fuel_consumption_per_trip'">fuel constption per trip</button>
-            <button style="background-color:red; border: none;" onclick="window.location.href='/delete_csv'">Delete
-                file</button>
+<div class="big-one">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header center">
+                Dashboard
+            </h1>
         </div>
-        {% if plot %}
-        {{ plot|safe }}
+        <div class="col-md-2">
+            <div class="buttons">
+                <button onclick="window.location.href='/coolantTemp'">Change of Coolant Temp</button>
+                <button onclick="window.location.href='/trip_details'">Number of Trips</button>
+                <button onclick="window.location.href='/acc_detect'">Detected any Accidents?</button>
+                <button onclick="window.location.href='/fuel_consumption_per_trip'">Fuel Consumption per Trip</button>
+                <button style="background-color:red; border: none;" onclick="window.location.href='/delete_csv'">Delete
+                    File</button>
+            </div>
+        </div>
+    </div>
 
-        {% endif %}
+    <div class="row-2">
+        <div class="col-md-4">
+            {% if not current_user.is_authenticated %}
+            <p>Login to view functions</p>
+            {% elif df == "None" %}
+            <p>Welcome {{ name }}</p>
 
-        {% endif %}
+            <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+                {{ form.csrf_token }}
+                <div class="form-group">
+                    <label for="file">Upload CSV File:</label>
+                    <input type="file" name="file" id="file" accept=".csv">
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+            {% else %}
+            {% if table or plot %}
+            <div class="table-container">
+                {{ table or plot|safe }}
+                {% if clicked_trip_number%}
+                <div class="b">
+                    <img src="data:image/jpeg;base64,{{plot1}}">
+                    <img src="data:image/jpeg;base64,{{plot2}}">
+                </div>
+                {% endif %}
 
+
+                <script>
+                    function storeTripNumber(tripNumber) {
+                        // Make an AJAX request to send the trip number to the server
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', '/store_trip_number', true);
+                        xhr.setRequestHeader('Content-Type', 'application/json');
+                        xhr.send(JSON.stringify({ tripNumber: tripNumber }));
+
+                        // Reload the page after the request is completed
+                        xhr.onload = function () {
+                            if (xhr.status === 200) {
+                                location.reload();
+                            } else {
+                                console.log('Request failed. Status:', xhr.status);
+                            }
+                        };
+
+                        // You can modify this code to perform any desired action before sending the request
+                        console.log('Trip number sent:', tripNumber);
+                    }
+                </script>
+
+            </div>
+            {% else %}
+            <p>No results available</p>
+            {% endif %}
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <div id="graphContainer"></div>
+        </div>
     </div>
 </div>
+
 {% endblock %}

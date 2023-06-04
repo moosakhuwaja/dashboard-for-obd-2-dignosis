@@ -18,3 +18,5 @@ env/
 /libraries/
 
 /__pycahe__/
+
+**/UPLOAD_FOLDER/

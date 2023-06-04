@@ -2,7 +2,6 @@ body {
   background-color: #ede7f6;
 }
 
-/* Header styles */
 header {
   background-color: #673ab7;
   color: #fff;
@@ -28,9 +27,8 @@ nav a {
   margin-right: 1rem;
 }
 
-/* Main content styles */
 main {
-  max-width: 800px;
+  max-width: 1450px;
   margin: 2rem auto;
   padding: 1rem;
   background-color: #f5f5f5;
@@ -41,6 +39,7 @@ h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
   color: #673ab7;
+  text-align: center;
 }
 
 form {
@@ -61,10 +60,8 @@ input {
   background-color: #fff;
   border-style: solid;
   border-color: #673ab7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
+
 button {
   padding: 0.5rem;
   margin-bottom: 1rem;
@@ -73,6 +70,36 @@ button {
   background-color: #fff;
   border-style: solid;
   border-color: #673ab7;
+  width: 190px;
+}
+
+.big-one {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  padding: 1rem;
+  background-color: #f5f5f5;
+}
+
+.row-2 {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  margin-left: 1%;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1rem;
 }
 
 button {
@@ -85,7 +112,6 @@ button:hover {
   background-color: #512da8;
 }
 
-/* Footer styles */
 footer {
   background-color: #512da8;
   color: #fff;
@@ -99,9 +125,47 @@ footer p {
   margin: 0;
   text-align: center;
 }
-.container {
+
+.table-container {
+  margin-top: 20px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+}
+.b > img {
+  width: 471px;
+  height: 246px;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  overflow-y: scroll;
+  height: 500px;
+  display: block;
+}
+
+.table-container th,
+.table-container td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-container th {
+  background-color: #f2f2f2;
+}
+
+.selected-row {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+#graphContainer {
+  height: 400px;
+  border: 1px solid #ddd;
+  margin-top: 20px;
+}
+.col-md-12 {
+  text-align: center;
 }

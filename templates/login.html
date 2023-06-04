@@ -3,6 +3,7 @@
 {% block head %}
 {{ super() }}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='../static/css/main.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='../static/css/login.css') }}">
 {% endblock %}
 
 {% block title %}
@@ -12,7 +13,9 @@ Login
 {% block content %}
 <div class="container">
     <h1>Login</h1>
-    <form action="{{ url_for('login') }}" method="POST">
+    <form action="{{ url_for('login') }}" method="POST" style="flex-direction: column;
+    display: flex;
+    align-items: center;">
 
         <div>
             <label for="email">Email:</label>

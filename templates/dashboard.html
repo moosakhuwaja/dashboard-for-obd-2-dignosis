@@ -13,6 +13,7 @@
                 Dashboard
             </h1>
         </div>
+<<<<<<< HEAD
         {% if df != "None" %}
         <div class="col-md-2">
             <div class="buttons">
@@ -29,6 +30,21 @@
     </div>
 
     <div class=" row-2">
+=======
+        <div class="col-md-2">
+            <div class="buttons">
+                <button onclick="window.location.href='/coolantTemp'">Change of Coolant Temp</button>
+                <button onclick="window.location.href='/trip_details'">Number of Trips</button>
+                <button onclick="window.location.href='/acc_detect'">Detected any Accidents?</button>
+                <button onclick="window.location.href='/fuel_consumption_per_trip'">Fuel Consumption per Trip</button>
+                <button style="background-color:red; border: none;" onclick="window.location.href='/delete_csv'">Delete
+                    File</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-2">
+>>>>>>> fb2786bc7c8186a9e6a65a5141030d8a7c4d04b3
         <div class="col-md-4">
             {% if not current_user.is_authenticated %}
             <p>Login to view functions</p>
@@ -89,6 +105,7 @@
     </div>
 </div>
 
+<<<<<<< HEAD
 
 
 <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
@@ -170,4 +187,6 @@
 
 
 
+=======
+>>>>>>> fb2786bc7c8186a9e6a65a5141030d8a7c4d04b3
 {% endblock %}

@@ -6,8 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/main.css') }}">
+<<<<<<< HEAD
     <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
 
+=======
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+>>>>>>> fb2786bc7c8186a9e6a65a5141030d8a7c4d04b3
 
 </head>
 
@@ -16,6 +20,7 @@
         <nav>
             <ul>
                 {% if current_user.is_authenticated %}
+<<<<<<< HEAD
                 <li><a href="{{ url_for('dashboard') }}">Dashboard</a>
                     <a href="{{ url_for('logout') }}">Logout</a>
                 </li>
@@ -29,12 +34,23 @@
                 <li><a href="{{ url_for('login') }}">Login</a>
                     <a href="{{ url_for('signup') }}">signup</a>
                 </li>
+=======
+                <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% else %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('signup') }}">signup</a></li>
+>>>>>>> fb2786bc7c8186a9e6a65a5141030d8a7c4d04b3
                 {% endif %}
             </ul>
         </nav>
     </header>
 
+<<<<<<< HEAD
     <main style="width: auto; height: auto;">
+=======
+    <main>
+>>>>>>> fb2786bc7c8186a9e6a65a5141030d8a7c4d04b3
         {% block content %}{% endblock %}
     </main>
 
@@ -43,6 +59,7 @@
     </footer>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<<<<<<< HEAD
     <script type="text/javascript">
         window.userWalletAddress = null;
         const connectWallet = document.getElementById('connectWallet');
@@ -116,6 +133,8 @@
 
 
     </script>
+=======
+>>>>>>> fb2786bc7c8186a9e6a65a5141030d8a7c4d04b3
 </body>
 
 </html>

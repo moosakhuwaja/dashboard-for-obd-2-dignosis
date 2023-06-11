@@ -11,11 +11,19 @@ Login
 {% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
 <div class="container parent" style="text-align: center; justify-content: center;">
     <h1 class="h1">Login</h1>
     <form class="child" action="{{ url_for('login') }}" method="POST" style="flex-direction: column;
     display: inline-block;
     align-items: center; margin: 0 auto;">
+=======
+<div class="container">
+    <h1>Login</h1>
+    <form action="{{ url_for('login') }}" method="POST" style="flex-direction: column;
+    display: flex;
+    align-items: center;">
+>>>>>>> fb2786bc7c8186a9e6a65a5141030d8a7c4d04b3
 
         <div>
             <label for="email">Email:</label>
@@ -31,8 +39,13 @@ Login
     </form>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
+<<<<<<< HEAD
     <ul class="flashes child" style="background: #ff3333; border-radius: 20rem;
     padding: 20px; width: 250px ; display: block;">
+=======
+    <ul class=flashes style="background: #ff3333; border-radius: 20rem;
+    padding: 20px;">
+>>>>>>> fb2786bc7c8186a9e6a65a5141030d8a7c4d04b3
         {% for message in messages %}
         <li>{{ message }}</li>
         {% endfor %}

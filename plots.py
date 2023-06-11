@@ -327,7 +327,11 @@ def plot_coolant_vs_time(trip_num):
     ax.plot(time_stamps, coolant_temps)
     ax.set_xlabel('Time')
     ax.set_ylabel('Engine Coolant Temperature')
+<<<<<<< HEAD
     ax.set_title(f'Trip {trip_num}: Temperature vs Time')
+=======
+    ax.set_title('Engine Coolant Temperature vs Time')
+>>>>>>> fb2786bc7c8186a9e6a65a5141030d8a7c4d04b3
 
     # Convert plot to PNG image and return it
     img = io.BytesIO()

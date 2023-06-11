@@ -1,5 +1,9 @@
 # ignore db
+<<<<<<< HEAD
 
+=======
+*.db
+>>>>>>> fb2786bc7c8186a9e6a65a5141030d8a7c4d04b3
 
 # ignore IDE-specific files
 .vscode/
@@ -14,12 +18,20 @@ env/
 *.log
 
 # ignore dependencies installed with pip
+<<<<<<< HEAD
 # /requirements.txt
+=======
+/requirements.txt
+>>>>>>> fb2786bc7c8186a9e6a65a5141030d8a7c4d04b3
 /libraries/
 
 /__pycahe__/
 
+<<<<<<< HEAD
 
 #upload_folder
 .UPLOAD_FOLDER
+=======
+**/UPLOAD_FOLDER/
+>>>>>>> fb2786bc7c8186a9e6a65a5141030d8a7c4d04b3
 UPLOAD_FOLDER/

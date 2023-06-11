@@ -230,7 +230,11 @@ def trip_details():  # Declare the variable as global
         global clicked_trip_number
         clicked_trip_number = x
 
+<<<<<<< HEAD
         return f'<a href="#" onclick="storeTripNumber({x}); return false;">Plot graph for trip number ==> {x}</a>'
+=======
+        return f'<a href="#" onclick="storeTripNumber({x}); return false;">{x}</a>'
+>>>>>>> fb2786bc7c8186a9e6a65a5141030d8a7c4d04b3
 
     r1 = plots.trip_details()
     r1.index.name = 'trip_number'  # Set the index name to 'trip_number'

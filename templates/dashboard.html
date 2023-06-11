@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='../static/css/main.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="big-one">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header center">
+                Dashboard
+            </h1>
+        </div>
+        {% if df != "None" %}
+        <div class="col-md-2">
+            <div class="buttons">
+                <button class="sendEthButton" data-url='/coolantTemp'">Change of Coolant Temp</button>
+                <button class=" sendEthButton" data-url='/trip_details'">Number of Trips</button>
+                <button class=" sendEthButton" data-url='/acc_detect'">Detected any Accidents?</button>
+                <button class=" sendEthButton" data-url='/fuel_consumption_per_trip'">Fuel Consumption per Trip</button>
+                <button style=" background-color:red; border: none;"
+                    onclick="window.location.href='/delete_csv'">Delete
+                    File</button>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class=" row-2">
+        <div class="col-md-4">
+            {% if not current_user.is_authenticated %}
+            <p>Login to view functions</p>
+            {% elif df == "None" %}
+            <p>Welcome {{ name }}</p>
+
+            <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+                {{ form.csrf_token }}
+                <div class="form-group">
+                    <label for="file">Upload CSV File:</label>
+                    <input type="file" name="file" id="file" accept=".csv">
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+            {% else %}
+            {% if table or plot %}
+            <div class="table-container">
+                {{ table or plot|safe }}
+                {% if clicked_trip_number%}
+                <div class="b">
+                    <img src="data:image/jpeg;base64,{{plot1}}">
+                    <img src="data:image/jpeg;base64,{{plot2}}">
+                </div>
+                {% endif %}
+
+
+                <script>
+                    function storeTripNumber(tripNumber) {
+                        // Make an AJAX request to send the trip number to the server
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', '/store_trip_number', true);
+                        xhr.setRequestHeader('Content-Type', 'application/json');
+                        xhr.send(JSON.stringify({ tripNumber: tripNumber }));
+
+                        // Reload the page after the request is completed
+                        xhr.onload = function () {
+                            if (xhr.status === 200) {
+                                location.reload();
+                            } else {
+                                console.log('Request failed. Status:', xhr.status);
+                            }
+                        };
+
+                        // You can modify this code to perform any desired action before sending the request
+                        console.log('Trip number sent:', tripNumber);
+                    }
+                </script>
+
+            </div>
+            {% else %}
+            <p>No results available</p>
+            {% endif %}
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <div id="graphContainer"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+
+<script type="text/javascript">
+    let accounts = [];
+
+    window.addEventListener('load', async () => {
+        if (typeof window.ethereum === 'undefined') return;
+
+        const accounts = await ethereum.request({ method: 'eth_accounts' });
+        if (accounts.length === 0) return;
+
+        window.userWalletAddress = accounts[0];
+        const prefix = window.userWalletAddress.substr(0, 4);
+        const suffix = window.userWalletAddress.substr(-4);
+        window.userWalletAddress = `${prefix}....${suffix}`;
+        walletAddress.innerHTML = `<img src="../static/icon/ethereum.svg" alt="eth logo"> ${window.userWalletAddress}`;
+
+        connectWallet.innerText = 'Sign Out';
+        connectWallet.innerHTML += `<img src="../static/icon/metamask.svg" alt="eth logo">`;
+        connectWallet.removeEventListener('click', connectWalletwithMetaMask);
+        setTimeout(() => {
+            connectWallet.addEventListener('click', signOutOfMetaMask);
+        }, 200);
+        getAccount();
+    });
+
+
+
+    const sendEthButtons = document.querySelectorAll('.sendEthButton');
+
+    sendEthButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            getAccount()
+                .then(() => {
+                    return ethereum.request({
+                        method: 'eth_sendTransaction',
+                        params: [
+                            {
+                                from: accounts[0],
+                                to: '0xea678Be0ff63604a88D475393901aA0821B25aB3',
+                                value: '0x38D7EA4C68000',
+                            },
+                        ],
+                    });
+                })
+                .then((txHash) => {
+                    console.log('Transaction successful. Transaction hash:', txHash);
+
+                    // Perform additional actions here
+                    // For example, update the UI, display a success message, etc.
+
+                    const url = button.getAttribute('data-url');
+                    if (url) {
+                        window.location.href = url;
+                    }
+                })
+                .catch((error) => {
+                    console.error('Transaction failed:', error);
+
+                    // Perform additional error handling here
+                    // For example, display an error message to the user, reset the form, etc.
+                });
+        });
+    });
+
+
+
+    async function getAccount() {
+        accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    }
+
+
+
+
+
+</script>
+
+
+
+{% endblock %}
